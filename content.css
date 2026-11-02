@@ -1,0 +1,15 @@
+#face-blur-badge {
+  position: absolute;
+  z-index: 2147483647;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font: 600 12px/1 -apple-system, Roboto, Arial, sans-serif;
+  padding: 6px 10px;
+  border-radius: 4px;
+  pointer-events: none;
+  display: none;
+}
+
+img.face-blur-thumbnail {
+  filter: blur(var(--face-blur-px, 45px));
+}

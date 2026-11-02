@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Gender Face Blur</title>
+  <style>
+    body {
+      width: 260px;
+      font: 14px/1.4 -apple-system, Roboto, Arial, sans-serif;
+      padding: 14px;
+      color: #202124;
+    }
+    h1 {
+      font-size: 15px;
+      margin: 0 0 10px;
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    label {
+      display: block;
+      margin-bottom: 4px;
+      color: #5f6368;
+      font-size: 12px;
+    }
+    input[type="range"] {
+      width: 100%;
+    }
+    .switch {
+      position: relative;
+      width: 40px;
+      height: 22px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      inset: 0;
+      background: #ccc;
+      border-radius: 22px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .slider::before {
+      content: "";
+      position: absolute;
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      top: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.2s;
+    }
+    input:checked + .slider {
+      background: #1a73e8;
+    }
+    input:checked + .slider::before {
+      transform: translateX(18px);
+    }
+    .value {
+      font-size: 12px;
+      color: #5f6368;
+      float: right;
+    }
+    footer {
+      font-size: 11px;
+      color: #80868b;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>YouTube Face Blur</h1>
+
+  <div class="row">
+    <span>Video Enabled</span>
+    <label class="switch">
+      <input type="checkbox" id="enabled" />
+      <span class="slider"></span>
+    </label>
+  </div>
+  <div class="row">
+    <span>Thumbnail Enabled</span>
+    <label class="switch">
+      <input type="checkbox" id="thumbnailEnabled" />
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="row" style="display:block; margin-top: 16px;">
+    <button id="allBlurBtn" style="width:100%; padding:10px; font-size:14px; background:#1a73e8; color:white; border:none; border-radius:4px; cursor:pointer;">
+      All Blur: OFF
+    </button>
+    <span style="font-size:11px; color:#80868b; display:block; margin-top:4px;">Blur entire screen (toggle with A key)</span>
+  </div>
+
+  <div class="row" style="display:block;">
+    <label for="targetGender">Blur faces of</label>
+    <select id="targetGender" style="width:100%; padding:6px; font-size:13px;">
+      <option value="male">Men</option>
+      <option value="female">Women</option>
+      <option value="both">Everyone</option>
+    </select>
+  </div>
+
+  <div class="row" style="display:block;">
+    <label for="genderThreshold">Gender confidence <span class="value" id="genderThresholdValue"></span></label>
+    <input type="range" id="genderThreshold" min="0.3" max="0.95" step="0.05" />
+  </div>
+
+  <div class="row" style="display:block;">
+    <label for="blurPx">Blur strength <span class="value" id="blurPxValue"></span></label>
+    <input type="range" id="blurPx" min="10" max="80" step="5" />
+  </div>
+
+  <div class="row" style="display:block;">
+    <label for="checkIntervalMs">Check interval <span class="value" id="checkIntervalMsValue"></span></label>
+    <input type="range" id="checkIntervalMs" min="100" max="3000" step="100" />
+  </div>
+  <div class="row" style="display:block;">
+    <label for="unblurAfter">Unblur after <span class="value" id="unblurAfterValue"></span></label>
+    <input type="range" id="unblurAfter" min="1000" max="10000" step="1000" />
+  </div>
+
+  <footer>Detection runs fully on-device. Video and visible thumbnail images are checked periodically.</footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
